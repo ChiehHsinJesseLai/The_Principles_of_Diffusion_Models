@@ -8,7 +8,7 @@ export default function ReadOnline() {
       <div className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-8 transition-colors font-medium"
+          className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 mb-8 transition-colors font-medium"
         >
           <ArrowLeft className="w-5 h-5" />
           Back to Home

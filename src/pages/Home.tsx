@@ -177,26 +177,34 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-50 to-slate-50 rounded-xl shadow-lg border-2 border-blue-200 p-8 mb-8">
+        <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
-            <Newspaper className="w-6 h-6 text-blue-600" />
+            <Newspaper className="w-6 h-6 text-orange-600" />
             <h2 className="text-2xl font-semibold text-slate-800">News & Updates</h2>
           </div>
           <div className="space-y-4">
-            <div className="bg-white rounded-lg p-4 border-l-4 border-blue-500 shadow-sm">
-              <div className="flex items-start justify-between mb-2">
-                <span className="text-sm font-semibold text-blue-600">2025/12/16</span>
-              </div>
-              <p className="text-slate-700">
-                Added <strong>Teaching Guide</strong> and <strong>Blog Post (Compact)</strong> sections for enhanced learning resources and accessible content overview.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-4 border-l-4 border-amber-500 shadow-sm">
+            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-amber-500">
               <div className="flex items-start justify-between mb-2">
                 <span className="text-sm font-semibold text-amber-600">Coming Soon</span>
               </div>
               <p className="text-slate-700">
                 Publisher for physical print version is currently being sorted out. Stay tuned for updates on availability.
+              </p>
+            </div>
+            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-orange-500">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-sm font-semibold text-orange-600">2025/12/16</span>
+              </div>
+              <p className="text-slate-700">
+                Added <strong>Teaching Guide</strong> and <strong>Blog Post (Compact)</strong> sections for enhanced learning resources and accessible content overview.
+              </p>
+            </div>
+            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-sm font-semibold text-slate-600">2025/12/15</span>
+              </div>
+              <p className="text-slate-700">
+                Official webpage established to provide comprehensive access to <em>The Principles of Diffusion Models</em> monograph and related resources.
               </p>
             </div>
           </div>
