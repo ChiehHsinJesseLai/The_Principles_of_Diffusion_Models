@@ -138,14 +138,14 @@ export default function Home() {
           </div>
           <div className="space-y-2">
             {authors.map((author, index) => (
-              <div key={index} className="border-b border-slate-100 last:border-0 pb-2 last:pb-0">
-                <p className="font-semibold text-slate-900 text-sm mb-1">{author.name}</p>
+              <div key={index} className="border-b border-slate-100 dark:border-slate-700 last:border-0 pb-2 last:pb-0">
+                <p className="font-semibold text-slate-900 dark:text-white text-sm mb-1">{author.name}</p>
                 <div className="flex flex-wrap items-center gap-2 text-xs">
                   {author.emails.map((email, emailIndex) => (
                     <a
                       key={emailIndex}
                       href={`mailto:${email}`}
-                      className="flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-orange-400 transition-colors"
+                      className="flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-orange-400 dark:hover:text-orange-300 transition-colors"
                     >
                       <Mail className="w-3 h-3" />
                       {email}
@@ -156,7 +156,7 @@ export default function Home() {
                       href={author.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-orange-400 transition-colors"
+                      className="flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-orange-400 dark:hover:text-orange-300 transition-colors"
                     >
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -273,15 +273,15 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-lg p-8 mb-8">
+        <div className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-slate-800 dark:to-slate-700 rounded-xl shadow-lg p-8 mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <Quote className="w-6 h-6 text-orange-400" />
+              <Quote className="w-6 h-6 text-orange-400 dark:text-orange-300" />
               <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">How to Cite</h2>
             </div>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-2 px-5 py-2.5 bg-orange-400 hover:bg-orange-500 rounded-lg transition-colors text-white font-semibold shadow-md hover:shadow-lg"
+              className="flex items-center gap-2 px-5 py-2.5 bg-orange-400 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600 rounded-lg transition-colors text-white font-semibold shadow-md hover:shadow-lg"
             >
               {copied ? (
                 <>
@@ -296,7 +296,7 @@ export default function Home() {
               )}
             </button>
           </div>
-          <pre className="bg-white border-2 border-orange-100 rounded-lg p-6 overflow-x-auto text-sm font-mono text-slate-800 dark:text-slate-100 leading-relaxed shadow-inner">
+          <pre className="bg-white dark:bg-slate-900 border-2 border-orange-100 dark:border-slate-600 rounded-lg p-6 overflow-x-auto text-sm font-mono text-slate-800 dark:text-slate-100 leading-relaxed shadow-inner">
             {bibtex}
           </pre>
         </div>
