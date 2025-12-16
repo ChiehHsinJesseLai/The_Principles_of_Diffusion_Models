@@ -1,13 +1,16 @@
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ScrollToTop from '../components/ScrollToTop';
+import DarkModeToggle from '../components/DarkModeToggle';
 
 export default function TeachingGuide() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F4ECFF' }}>
+    <div className="min-h-screen bg-white dark:bg-slate-900">
+      <DarkModeToggle />
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <Link
           to="/"
+          onClick={() => sessionStorage.setItem('scrollToTab', 'teaching')}
           className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-500 mb-8 transition-colors font-medium"
         >
           <ArrowLeft className="w-5 h-5" />

@@ -1,15 +1,25 @@
-import { useState, useEffect } from 'react';
-import { ExternalLink, BookOpen, FileText, GraduationCap, Copy, Check, Users, Mail, Newspaper, Library, Feather } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { ExternalLink, BookOpen, FileText, GraduationCap, Copy, Check, Users, Mail, Newspaper, Library, Feather, Quote } from 'lucide-react';
 import { getVisitorCount } from '../lib/visitorTracking';
 import ScrollToTop from '../components/ScrollToTop';
 import CommentsSection from '../components/CommentsSection';
+import DarkModeToggle from '../components/DarkModeToggle';
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
   const [visitorCount, setVisitorCount] = useState<number>(0);
+  const accessBookRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getVisitorCount().then(setVisitorCount);
+
+    const scrollToTab = sessionStorage.getItem('scrollToTab');
+    if (scrollToTab && accessBookRef.current) {
+      setTimeout(() => {
+        accessBookRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        sessionStorage.removeItem('scrollToTab');
+      }, 100);
+    }
   }, []);
 
   const bibtex = `@article{lai2025principles,
@@ -62,7 +72,7 @@ export default function Home() {
     {
       id: 'arxiv',
       label: 'arXiv',
-      icon: BookOpen,
+      icon: FileText,
       type: 'external',
       url: 'https://arxiv.org/abs/2510.21890',
     },
@@ -103,30 +113,32 @@ export default function Home() {
     if (tab.type === 'external' && tab.url) {
       window.open(tab.url, '_blank', 'noopener,noreferrer');
     } else if (tab.type === 'internal' && tab.path) {
+      sessionStorage.setItem('scrollToTab', tab.id);
       window.location.href = tab.path;
     }
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F4ECFF' }}>
+    <div className="min-h-screen transition-colors duration-200 bg-[#F8F2FF] dark:bg-slate-900">
+      <DarkModeToggle />
       <div className="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <header className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-slate-900 mb-3 leading-tight">
+          <h1 className="text-5xl font-bold text-slate-900 dark:text-slate-100 mb-3 leading-tight">
             The Principles of Diffusion Models
           </h1>
-          <p className="text-2xl text-slate-700 font-medium mb-6">
+          <p className="text-2xl text-slate-700 dark:text-slate-300 dark:text-slate-300 font-medium mb-6">
             From Origins to Advances
           </p>
-          <div className="flex items-center justify-center gap-2 text-slate-500 text-sm">
+          <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
             <Users className="w-4 h-4" />
             <span>{visitorCount.toLocaleString()} visitors</span>
           </div>
         </header>
 
-        <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-6 mb-8">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6 mb-8">
           <div className="flex items-center gap-3 mb-4">
             <Users className="w-6 h-6 text-orange-400" />
-            <h2 className="text-2xl font-semibold text-slate-800">Authors</h2>
+            <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">Authors</h2>
           </div>
           <div className="space-y-2">
             {authors.map((author, index) => (
@@ -137,7 +149,7 @@ export default function Home() {
                     <a
                       key={emailIndex}
                       href={`mailto:${email}`}
-                      className="flex items-center gap-1 text-slate-600 hover:text-orange-400 transition-colors"
+                      className="flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-orange-400 transition-colors"
                     >
                       <Mail className="w-3 h-3" />
                       {email}
@@ -148,7 +160,7 @@ export default function Home() {
                       href={author.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-slate-600 hover:text-orange-400 transition-colors"
+                      className="flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-orange-400 transition-colors"
                     >
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -162,12 +174,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 mb-8">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-8 mb-8">
           <div className="flex items-center gap-3 mb-4">
             <Feather className="w-6 h-6 text-orange-400" />
-            <h2 className="text-2xl font-semibold text-slate-800">Abstract</h2>
+            <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">Abstract</h2>
           </div>
-          <div className="text-slate-700 leading-relaxed space-y-4">
+          <div className="text-slate-700 dark:text-slate-300 leading-relaxed space-y-4">
             <p>
               This book focuses on the principles that have shaped the development of diffusion models, tracing their origins and showing how different formulations arise from common mathematical ideas. Diffusion modeling begins by specifying a forward corruption process that gradually turns data into noise. This forward process links the data distribution to a simple noise distribution by defining a continuous family of intermediate distributions. The core objective of a diffusion model is to construct another process that runs in the opposite direction, transforming noise into data while recovering the same intermediate distributions defined by the forward corruption process.
             </p>
@@ -183,52 +195,52 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 mb-8">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
             <Newspaper className="w-6 h-6 text-orange-400" />
-            <h2 className="text-2xl font-semibold text-slate-800">News & Updates</h2>
+            <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">News & Updates</h2>
           </div>
           <div className="space-y-4">
-            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
+            <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4 border-l-4 border-slate-500">
               <div className="flex items-start justify-between mb-2">
-                <span className="text-sm font-semibold text-slate-600">2025/12/16</span>
+                <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">2025/12/16</span>
               </div>
-              <p className="text-slate-700">
+              <p className="text-slate-700 dark:text-slate-300">
                 Added <strong>Teaching Guide</strong> and <strong>Blog Post (Compact)</strong> sections for enhanced learning resources and accessible content overview.
               </p>
             </div>
-            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
+            <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4 border-l-4 border-slate-500">
               <div className="flex items-start justify-between mb-2">
-                <span className="text-sm font-semibold text-slate-600">2025/12/15</span>
+                <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">2025/12/15</span>
               </div>
-              <p className="text-slate-700">
+              <p className="text-slate-700 dark:text-slate-300">
                 Official webpage established to provide comprehensive access to <em>The Principles of Diffusion Models</em> monograph and related resources.
               </p>
             </div>
-            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
+            <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4 border-l-4 border-slate-500">
               <div className="flex items-start justify-between mb-2">
-                <span className="text-sm font-semibold text-slate-600">2025/10/24</span>
+                <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">2025/10/24</span>
               </div>
-              <p className="text-slate-700">
+              <p className="text-slate-700 dark:text-slate-300">
                 Our book <strong>The Principles of Diffusion Models</strong> was made publicly available on arXiv.
               </p>
             </div>
-            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-amber-500">
+            <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4 border-l-4 border-amber-500">
               <div className="flex items-start justify-between mb-2">
                 <span className="text-sm font-semibold text-amber-600">Coming Soon</span>
               </div>
-              <p className="text-slate-700">
+              <p className="text-slate-700 dark:text-slate-300">
                 Publisher for physical print version is currently being sorted out. Stay tuned for updates on availability.
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden mb-8">
+        <div ref={accessBookRef} className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden mb-8">
           <div className="p-6">
             <div className="flex items-center justify-center gap-3 mb-6">
               <Library className="w-6 h-6 text-orange-400" />
-              <h2 className="text-2xl font-semibold text-slate-800">Access the Book</h2>
+              <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">Access the Book</h2>
             </div>
             <div className="space-y-4">
               <div className="flex flex-wrap justify-center gap-3">
@@ -265,11 +277,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-lg p-8 mb-8">
+        <div className="bg-gradient-to-br from-orange-50/40 to-amber-50/40 rounded-xl shadow-lg p-8 mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <FileText className="w-6 h-6 text-orange-400" />
-              <h2 className="text-2xl font-semibold text-slate-800">How to Cite</h2>
+              <Quote className="w-6 h-6 text-orange-400" />
+              <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">How to Cite</h2>
             </div>
             <button
               onClick={handleCopy}
@@ -288,7 +300,7 @@ export default function Home() {
               )}
             </button>
           </div>
-          <pre className="bg-white border-2 border-orange-100 rounded-lg p-6 overflow-x-auto text-sm font-mono text-slate-800 leading-relaxed shadow-inner">
+          <pre className="bg-white border-2 border-orange-100 rounded-lg p-6 overflow-x-auto text-sm font-mono text-slate-800 dark:text-slate-100 leading-relaxed shadow-inner">
             {bibtex}
           </pre>
         </div>
