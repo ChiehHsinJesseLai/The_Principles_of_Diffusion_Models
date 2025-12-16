@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ExternalLink, BookOpen, FileText, GraduationCap, Copy, Check, Users, Mail, Newspaper } from 'lucide-react';
+import { ExternalLink, BookOpen, FileText, GraduationCap, Copy, Check, Users, Mail, Newspaper, Library, Feather } from 'lucide-react';
 import { getVisitorCount } from '../lib/visitorTracking';
 import ScrollToTop from '../components/ScrollToTop';
 import CommentsSection from '../components/CommentsSection';
@@ -164,7 +164,7 @@ export default function Home() {
 
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <BookOpen className="w-6 h-6 text-orange-600" />
+            <Feather className="w-6 h-6 text-orange-600" />
             <h2 className="text-2xl font-semibold text-slate-800">Abstract</h2>
           </div>
           <div className="text-slate-700 leading-relaxed space-y-4">
@@ -219,7 +219,7 @@ export default function Home() {
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden mb-8">
           <div className="p-6">
             <div className="flex items-center justify-center gap-3 mb-6">
-              <BookOpen className="w-6 h-6 text-orange-600" />
+              <Library className="w-6 h-6 text-orange-600" />
               <h2 className="text-2xl font-semibold text-slate-800">Access the Book</h2>
             </div>
             <div className="space-y-4">
