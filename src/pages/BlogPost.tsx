@@ -6,11 +6,11 @@ import ScrollToTop from '../components/ScrollToTop';
 
 export default function BlogPost() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: '#EDDFFF' }}>
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 mb-8 transition-colors font-medium"
+          className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-500 mb-8 transition-colors font-medium"
         >
           <ArrowLeft className="w-5 h-5" />
           Back to Home
@@ -39,7 +39,7 @@ export default function BlogPost() {
                 In what follows, we slow the story down and keep a single guiding thread:
               </p>
 
-              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-xl text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-400 pl-6 italic text-xl text-slate-700 my-6">
                 All these models describe different ways to <em>move probability mass</em> from "simple noise" to "complicated data". Under the surface, they are all based on the same principle from calculus: the <em>change-of-variable rule</em>.
               </blockquote>
 
@@ -234,7 +234,7 @@ export default function BlogPost() {
                 A neat calculation shows that the original "impossible" objective can be rewritten as
               </p>
 
-              <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 my-6 overflow-x-auto">
+              <div className="bg-orange-50 border-2 border-orange-100 rounded-lg p-6 my-6 overflow-x-auto">
                 <BlockMath math="\mathbb{E}_{p_t(\mathbf{x}_t)}\!\big[ D_{\mathrm{KL}}(p(\mathbf{x}_{t-1}\mid \mathbf{x}_t)\,\|\,p_\theta(\mathbf{x}_{t-1}\mid \mathbf{x}_t)) \big] = \mathbb{E}_{p_{\text{data}}(\mathbf{x}_0)}\mathbb{E}_{p(\mathbf{x}_t\mid \mathbf{x}_0)} \big[ D_{\mathrm{KL}}(p(\mathbf{x}_{t-1}\mid \mathbf{x}_t,\mathbf{x}_0)\,\|\,p_\theta(\mathbf{x}_{t-1}\mid \mathbf{x}_t)) \big] + C," />
               </div>
 
@@ -328,7 +328,7 @@ export default function BlogPost() {
                 More precisely, <em>denoising score matching</em> gives the same kind of "conditional trick" we saw in DDPM: the intractable regression target <InlineMath math="\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t)" /> can be replaced by the <em>tractable</em> conditional target <InlineMath math="\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t\mid \mathbf{x}_0)" />, and the two objectives differ only by a constant (so they induce the same gradient updates and the same optimum). Formally, for a constant <InlineMath math="C" /> that does <em>not</em> depend on <InlineMath math="\theta" />,
               </p>
 
-              <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 my-6 overflow-x-auto">
+              <div className="bg-orange-50 border-2 border-orange-100 rounded-lg p-6 my-6 overflow-x-auto">
                 <BlockMath math="\mathbb{E}_{t}\,\mathbb{E}_{\mathbf{x}_t\sim p_t} \Big[ \lambda(t)\, \big\| \mathbf{s}_\theta(\mathbf{x}_t,t) - \nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t) \big\|_2^2 \Big] = \mathbb{E}_{t}\,\mathbb{E}_{\mathbf{x}_0\sim p_{\text{data}}}\,\mathbb{E}_{\mathbf{x}_t\sim p(\cdot\mid \mathbf{x}_0)} \Big[ \lambda(t)\, \big\| \mathbf{s}_\theta(\mathbf{x}_t,t) -\nabla_{\mathbf{x}_t}\log p_t(\mathbf{x}_t\mid \mathbf{x}_0) \big\|_2^2 \Big] + C." />
               </div>
 
@@ -398,7 +398,7 @@ export default function BlogPost() {
                 Now the key equivalence mirrors denoising score matching. A standard squared-loss decomposition implies that, for a constant <InlineMath math="C" /> independent of <InlineMath math="\theta" />,
               </p>
 
-              <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 my-6 overflow-x-auto">
+              <div className="bg-orange-50 border-2 border-orange-100 rounded-lg p-6 my-6 overflow-x-auto">
                 <BlockMath math="\mathbb{E}_{t}\,\mathbb{E}_{\mathbf{x}_t\sim p_t} \Big[ \lambda(t)\, \big\| \mathbf{v}_\theta(\mathbf{x}_t,t)-\mathbf{v}(\mathbf{x}, t) \big\|_2^2 \Big] = \mathbb{E}_{t,\,\mathbf{x}_0,\,\boldsymbol{\epsilon}} \Big[ \lambda(t)\, \big\| \mathbf{v}_\theta(\mathbf{x}_t,t)-\mathbf{v}^{\text{cond}}(\mathbf{x}_t,t) \big\|_2^2 \Big] + C." />
               </div>
 
@@ -520,7 +520,7 @@ export default function BlogPost() {
                 This immediately raises a recurring question:
               </p>
 
-              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-lg text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-400 pl-6 italic text-lg text-slate-700 my-6">
                 In diffusion models, what happens to the underlying <em>probability density</em> when we move (and sometimes randomly perturb) all points, from the data distribution toward the prior, or back again?
               </blockquote>
 
@@ -584,7 +584,7 @@ export default function BlogPost() {
                 The takeaway we will keep using is:
               </p>
 
-              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-lg text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-400 pl-6 italic text-lg text-slate-700 my-6">
                 If we move points by an invertible map, density changes according to how much the map locally stretches or compresses space.
               </blockquote>
 
@@ -662,7 +662,7 @@ export default function BlogPost() {
                 Now the limit <InlineMath math="\Delta t\to 0" /> is just the definition of a time derivative, yielding the <em>continuity equation</em>
               </p>
 
-              <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 my-6">
+              <div className="bg-orange-50 border-2 border-orange-100 rounded-lg p-6 my-6">
                 <BlockMath math="\frac{\partial p_t(\mathbf{x})}{\partial t} = -\nabla_{\mathbf{x}}\cdot\bigl(p_t(\mathbf{x})\,\mathbf{v}_t(\mathbf{x})\bigr)." />
               </div>
 
@@ -684,7 +684,7 @@ export default function BlogPost() {
                 is called the <em>advective flux</em>. Intuitively, it is "<em>density × speed</em>": how much probability is being carried past <InlineMath math="\mathbf{x}" /> per unit time. With this notation, the continuity equation is just a local balance law:
               </p>
 
-              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-lg text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-400 pl-6 italic text-lg text-slate-700 my-6">
                 Density at <InlineMath math="\mathbf{x}" /> goes <em>up</em> when more probability flows <em>in</em> than flows <em>out</em>, and goes <em>down</em> when more flows <em>out</em> than flows <em>in</em>.
               </blockquote>
 
@@ -720,7 +720,7 @@ export default function BlogPost() {
                 Add these two contributions, and apply the same net-outflow rule as in the continuity equation:
               </p>
 
-              <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 my-6 overflow-x-auto">
+              <div className="bg-orange-50 border-2 border-orange-100 rounded-lg p-6 my-6 overflow-x-auto">
                 <BlockMath math="\frac{\partial p_t(\mathbf{x})}{\partial t} = -\nabla_{\mathbf{x}}\cdot\Big(\mathbf{J}_{\text{move}}(\mathbf{x},t)+\mathbf{J}_{\text{spread}}(\mathbf{x},t)\Big) = -\nabla_{\mathbf{x}}\cdot\bigl(\mathbf{f}_t(\mathbf{x})\,p_t(\mathbf{x})\bigr) +\frac{1}{2}g(t)^2\,\Delta_{\mathbf{x}}p_t(\mathbf{x})." />
               </div>
 
@@ -754,7 +754,7 @@ export default function BlogPost() {
                 This raises a natural question:
               </p>
 
-              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-lg text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-400 pl-6 italic text-lg text-slate-700 my-6">
                 Can we design a standalone generative principle that trains in a stable way, and samples quickly?
               </blockquote>
 
@@ -788,7 +788,7 @@ export default function BlogPost() {
                 If we could query the true <em>time-jump</em> <InlineMath math="\Psi_{s\to t}" />, the training story would be almost too simple: we would just regress to the oracle target. Concretely, we would sample a start time <InlineMath math="s" />, an end time <InlineMath math="t" />, draw a point <InlineMath math="\mathbf{x}_s\sim p_s" />, and train a model <InlineMath math="\mathbf{G}_\theta" /> to predict where that point should land after evolving from <InlineMath math="s" /> to <InlineMath math="t" />:
               </p>
 
-              <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6 my-6">
+              <div className="bg-orange-50 border-2 border-orange-100 rounded-lg p-6 my-6">
                 <BlockMath math="\mathcal{L}_{\text{oracle}}(\theta) = \mathbb{E}_{s,t}\,\mathbb{E}_{\mathbf{x}_s\sim p_s} \Bigl[ w(s,t)d\bigl(\mathbf{G}_\theta(\mathbf{x}_s,s,t),\,\Psi_{s\to t}(\mathbf{x}_s)\bigr) \Bigr]." />
               </div>
 
@@ -1078,7 +1078,7 @@ export default function BlogPost() {
         <div className="mt-12 pt-8 border-t border-slate-200">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 transition-colors font-medium"
+            className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-500 transition-colors font-medium"
           >
             <ArrowLeft className="w-5 h-5" />
             Back to Home

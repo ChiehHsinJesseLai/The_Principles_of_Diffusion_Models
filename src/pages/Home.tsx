@@ -108,7 +108,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+    <div className="min-h-screen" style={{ backgroundColor: '#EDDFFF' }}>
       <div className="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <header className="text-center mb-12">
           <h1 className="text-5xl font-bold text-slate-900 mb-3 leading-tight">
@@ -125,7 +125,7 @@ export default function Home() {
 
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-6 mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <Users className="w-6 h-6 text-orange-600" />
+            <Users className="w-6 h-6 text-orange-400" />
             <h2 className="text-2xl font-semibold text-slate-800">Authors</h2>
           </div>
           <div className="space-y-2">
@@ -137,7 +137,7 @@ export default function Home() {
                     <a
                       key={emailIndex}
                       href={`mailto:${email}`}
-                      className="flex items-center gap-1 text-slate-600 hover:text-orange-600 transition-colors"
+                      className="flex items-center gap-1 text-slate-600 hover:text-orange-400 transition-colors"
                     >
                       <Mail className="w-3 h-3" />
                       {email}
@@ -148,7 +148,7 @@ export default function Home() {
                       href={author.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-slate-600 hover:text-orange-600 transition-colors"
+                      className="flex items-center gap-1 text-slate-600 hover:text-orange-400 transition-colors"
                     >
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -164,7 +164,7 @@ export default function Home() {
 
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <Feather className="w-6 h-6 text-orange-600" />
+            <Feather className="w-6 h-6 text-orange-400" />
             <h2 className="text-2xl font-semibold text-slate-800">Abstract</h2>
           </div>
           <div className="text-slate-700 leading-relaxed space-y-4">
@@ -185,7 +185,7 @@ export default function Home() {
 
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 mb-8">
           <div className="flex items-center gap-3 mb-6">
-            <Newspaper className="w-6 h-6 text-orange-600" />
+            <Newspaper className="w-6 h-6 text-orange-400" />
             <h2 className="text-2xl font-semibold text-slate-800">News & Updates</h2>
           </div>
           <div className="space-y-4">
@@ -195,6 +195,14 @@ export default function Home() {
               </div>
               <p className="text-slate-700">
                 Publisher for physical print version is currently being sorted out. Stay tuned for updates on availability.
+              </p>
+            </div>
+            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-sm font-semibold text-slate-600">2025/10/24</span>
+              </div>
+              <p className="text-slate-700">
+                Our book <strong>The Principles of Diffusion Models</strong> first publicly released on arXiv.
               </p>
             </div>
             <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
@@ -219,7 +227,7 @@ export default function Home() {
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden mb-8">
           <div className="p-6">
             <div className="flex items-center justify-center gap-3 mb-6">
-              <Library className="w-6 h-6 text-orange-600" />
+              <Library className="w-6 h-6 text-orange-400" />
               <h2 className="text-2xl font-semibold text-slate-800">Access the Book</h2>
             </div>
             <div className="space-y-4">
@@ -230,7 +238,7 @@ export default function Home() {
                     <button
                       key={tab.id}
                       onClick={() => handleTabClick(tab)}
-                      className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 bg-orange-500 hover:bg-orange-600 text-white shadow-md"
+                      className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 bg-orange-400 hover:bg-orange-500 text-white shadow-md"
                     >
                       <Icon className="w-5 h-5" />
                       {tab.label}
@@ -246,7 +254,7 @@ export default function Home() {
                     <button
                       key={tab.id}
                       onClick={() => handleTabClick(tab)}
-                      className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 bg-orange-500 hover:bg-orange-600 text-white shadow-md"
+                      className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 bg-orange-400 hover:bg-orange-500 text-white shadow-md"
                     >
                       <Icon className="w-5 h-5" />
                       {tab.label}
@@ -262,12 +270,12 @@ export default function Home() {
         <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-lg p-8 mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <FileText className="w-6 h-6 text-orange-600" />
+              <FileText className="w-6 h-6 text-orange-400" />
               <h2 className="text-2xl font-semibold text-slate-800">How to Cite</h2>
             </div>
             <button
               onClick={handleCopy}
-              className="flex items-center gap-2 px-5 py-2.5 bg-orange-500 hover:bg-orange-600 rounded-lg transition-colors text-white font-semibold shadow-md hover:shadow-lg"
+              className="flex items-center gap-2 px-5 py-2.5 bg-orange-400 hover:bg-orange-500 rounded-lg transition-colors text-white font-semibold shadow-md hover:shadow-lg"
             >
               {copied ? (
                 <>
@@ -282,7 +290,7 @@ export default function Home() {
               )}
             </button>
           </div>
-          <pre className="bg-white border-2 border-orange-200 rounded-lg p-6 overflow-x-auto text-sm font-mono text-slate-800 leading-relaxed shadow-inner">
+          <pre className="bg-white border-2 border-orange-100 rounded-lg p-6 overflow-x-auto text-sm font-mono text-slate-800 leading-relaxed shadow-inner">
             {bibtex}
           </pre>
         </div>

@@ -214,7 +214,7 @@ export default function CommentsSection() {
           </div>
           <button
             onClick={() => setReplyingTo(isReplying ? null : comment.id)}
-            className="flex items-center gap-1 text-xs text-orange-600 hover:text-orange-700 font-medium"
+            className="flex items-center gap-1 text-xs text-orange-400 hover:text-orange-400 font-medium"
           >
             <Reply className="w-3 h-3" />
             {isReplying ? 'Cancel' : 'Reply'}
@@ -230,7 +230,7 @@ export default function CommentsSection() {
                 value={authorName}
                 onChange={(e) => setAuthorName(e.target.value)}
                 placeholder="Name (optional)"
-                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                 maxLength={100}
               />
               <textarea
@@ -238,7 +238,7 @@ export default function CommentsSection() {
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Write a reply... (supports LaTeX: $inline$ or $$block$$)"
                 rows={3}
-                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent resize-none"
                 maxLength={5000}
                 required
               />
@@ -247,7 +247,7 @@ export default function CommentsSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-1 px-4 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-1 px-4 py-1.5 bg-orange-400 hover:bg-orange-500 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="w-3 h-3" />
                   {isSubmitting ? 'Posting...' : 'Post Reply'}
@@ -275,7 +275,7 @@ export default function CommentsSection() {
   return (
     <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8">
       <div className="flex items-center gap-3 mb-6">
-        <MessageSquare className="w-6 h-6 text-orange-500" />
+        <MessageSquare className="w-6 h-6 text-orange-400" />
         <h2 className="text-2xl font-semibold text-slate-800">Discussion & Feedback</h2>
       </div>
 
@@ -291,7 +291,7 @@ export default function CommentsSection() {
               value={authorName}
               onChange={(e) => setAuthorName(e.target.value)}
               placeholder="Anonymous"
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
               maxLength={100}
             />
           </div>
@@ -306,7 +306,7 @@ export default function CommentsSection() {
               onChange={(e) => setContent(e.target.value)}
               placeholder="Share your thoughts, questions, or feedback... Use $x^2$ for inline math or $$\int_0^1 x^2 dx$$ for block math."
               rows={4}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent resize-none"
               maxLength={5000}
               required
             />
@@ -317,7 +317,7 @@ export default function CommentsSection() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center gap-2 px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-2.5 bg-orange-400 hover:bg-orange-500 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send className="w-4 h-4" />
               {isSubmitting ? 'Posting...' : 'Post Comment'}

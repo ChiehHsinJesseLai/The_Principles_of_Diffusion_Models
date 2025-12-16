@@ -4,11 +4,11 @@ import ScrollToTop from '../components/ScrollToTop';
 
 export default function TeachingGuide() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: '#EDDFFF' }}>
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 mb-8 transition-colors font-medium"
+          className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-500 mb-8 transition-colors font-medium"
         >
           <ArrowLeft className="w-5 h-5" />
           Back to Home
@@ -28,7 +28,7 @@ export default function TeachingGuide() {
             <section>
               <p className="text-lg leading-relaxed text-slate-700">
                 A concise walkthrough from a different perspective (not covering the full intuitions or insights developed in the book) is also available as a blog post:{' '}
-                <a href="https://the-principles-of-di-vzje.bolt.host/blog" className="text-orange-600 hover:text-orange-700">
+                <a href="https://the-principles-of-di-vzje.bolt.host/blog" className="text-orange-400 hover:text-orange-500">
                   https://the-principles-of-di-vzje.bolt.host/blog
                 </a>
               </p>

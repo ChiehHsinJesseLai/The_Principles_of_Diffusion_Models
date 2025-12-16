@@ -4,11 +4,11 @@ import ScrollToTop from '../components/ScrollToTop';
 
 export default function Publisher() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+    <div className="min-h-screen" style={{ backgroundColor: '#EDDFFF' }}>
       <div className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 mb-8 transition-colors font-medium"
+          className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-500 mb-8 transition-colors font-medium"
         >
           <ArrowLeft className="w-5 h-5" />
           Back to Home
