@@ -99,30 +99,10 @@ export default function CommentsSection() {
       setContent('');
       setReplyingTo(null);
       fetchComments();
-
-      sendEmailNotification(commentData);
     }
 
     setIsSubmitting(false);
     setTimeout(() => setSubmitMessage(''), 5000);
-  };
-
-  const sendEmailNotification = async (commentData: { author_name: string; content: string; parent_id: string | null }) => {
-    try {
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-      await fetch(`${supabaseUrl}/functions/v1/notify-comment`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${supabaseAnonKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(commentData),
-      });
-    } catch (error) {
-      console.error('Error sending email notification:', error);
-    }
   };
 
   const formatDate = (dateString: string) => {
@@ -204,17 +184,17 @@ export default function CommentsSection() {
 
     return (
       <div key={comment.id} className={`${depth > 0 ? 'ml-8 mt-3' : ''}`}>
-        <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+        <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4 border border-slate-200 dark:border-slate-600">
           <div className="flex items-center justify-between mb-2">
-            <span className="font-semibold text-slate-800">{comment.author_name}</span>
-            <span className="text-xs text-slate-500">{formatDate(comment.created_at)}</span>
+            <span className="font-semibold text-slate-800 dark:text-slate-100">{comment.author_name}</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">{formatDate(comment.created_at)}</span>
           </div>
-          <div className="text-slate-700 whitespace-pre-wrap mb-2">
+          <div className="text-slate-700 dark:text-slate-300 whitespace-pre-wrap mb-2">
             {renderMathContent(comment.content)}
           </div>
           <button
             onClick={() => setReplyingTo(isReplying ? null : comment.id)}
-            className="flex items-center gap-1 text-xs text-orange-400 hover:text-orange-400 font-medium"
+            className="flex items-center gap-1 text-xs text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-400 font-medium"
           >
             <Reply className="w-3 h-3" />
             {isReplying ? 'Cancel' : 'Reply'}
@@ -223,14 +203,14 @@ export default function CommentsSection() {
           {isReplying && (
             <form
               onSubmit={(e) => handleSubmit(e, comment.id)}
-              className="mt-3 space-y-3 border-t border-slate-300 pt-3"
+              className="mt-3 space-y-3 border-t border-slate-300 dark:border-slate-600 pt-3"
             >
               <input
                 type="text"
                 value={authorName}
                 onChange={(e) => setAuthorName(e.target.value)}
                 placeholder="Name (optional)"
-                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+                className="w-full px-3 py-2 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100"
                 maxLength={100}
               />
               <textarea
@@ -238,16 +218,16 @@ export default function CommentsSection() {
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Write a reply... (supports LaTeX: $inline$ or $$block$$)"
                 rows={3}
-                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent resize-none"
+                className="w-full px-3 py-2 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent resize-none bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100"
                 maxLength={5000}
                 required
               />
               <div className="flex items-center justify-between">
-                <p className="text-xs text-slate-500">{content.length}/5000 characters</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">{content.length}/5000 characters</p>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-1 px-4 py-1.5 bg-orange-400 hover:bg-orange-500 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center gap-1 px-4 py-1.5 bg-orange-400 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="w-3 h-3" />
                   {isSubmitting ? 'Posting...' : 'Post Reply'}
@@ -273,16 +253,16 @@ export default function CommentsSection() {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8">
+    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-8">
       <div className="flex items-center gap-3 mb-6">
-        <MessageSquare className="w-6 h-6 text-orange-400" />
-        <h2 className="text-2xl font-semibold text-slate-800">Discussion & Feedback</h2>
+        <MessageSquare className="w-6 h-6 text-orange-400 dark:text-orange-300" />
+        <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100">Discussion & Feedback</h2>
       </div>
 
       <form onSubmit={(e) => handleSubmit(e, null)} className="mb-8">
         <div className="space-y-4">
           <div>
-            <label htmlFor="authorName" className="block text-sm font-medium text-slate-700 mb-2">
+            <label htmlFor="authorName" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Name (optional)
             </label>
             <input
@@ -291,14 +271,14 @@ export default function CommentsSection() {
               value={authorName}
               onChange={(e) => setAuthorName(e.target.value)}
               placeholder="Anonymous"
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100"
               maxLength={100}
             />
           </div>
 
           <div>
-            <label htmlFor="content" className="block text-sm font-medium text-slate-700 mb-2">
-              Comment * <span className="text-xs text-slate-500">(supports LaTeX: $inline$ or $$block$$)</span>
+            <label htmlFor="content" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Comment * <span className="text-xs text-slate-500 dark:text-slate-400">(supports LaTeX: $inline$ or $$block$$)</span>
             </label>
             <textarea
               id="content"
@@ -306,18 +286,18 @@ export default function CommentsSection() {
               onChange={(e) => setContent(e.target.value)}
               placeholder="Share your thoughts, questions, or feedback... Use $x^2$ for inline math or $$\int_0^1 x^2 dx$$ for block math."
               rows={4}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent resize-none"
+              className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent resize-none bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100"
               maxLength={5000}
               required
             />
-            <p className="text-xs text-slate-500 mt-1">{content.length}/5000 characters</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{content.length}/5000 characters</p>
           </div>
 
           <div className="flex items-center justify-between">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center gap-2 px-6 py-2.5 bg-orange-400 hover:bg-orange-500 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-2.5 bg-orange-400 hover:bg-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send className="w-4 h-4" />
               {isSubmitting ? 'Posting...' : 'Post Comment'}
@@ -326,7 +306,7 @@ export default function CommentsSection() {
             {submitMessage && (
               <p
                 className={`text-sm ${
-                  submitMessage.includes('success') ? 'text-green-600' : 'text-red-600'
+                  submitMessage.includes('success') ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                 }`}
               >
                 {submitMessage}
@@ -336,13 +316,13 @@ export default function CommentsSection() {
         </div>
       </form>
 
-      <div className="border-t border-slate-200 pt-6">
-        <h3 className="text-lg font-semibold text-slate-800 mb-4">
+      <div className="border-t border-slate-200 dark:border-slate-700 pt-6">
+        <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">
           Comments ({totalCommentCount(comments)})
         </h3>
 
         {comments.length === 0 ? (
-          <p className="text-slate-500 text-center py-8">
+          <p className="text-slate-500 dark:text-slate-400 text-center py-8">
             No comments yet. Be the first to share your thoughts!
           </p>
         ) : (
