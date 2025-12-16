@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MessageSquare, Send, Reply } from 'lucide-react';
+import { MessageSquare, Send, Reply, ThumbsUp, ThumbsDown, Link } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
@@ -10,6 +10,8 @@ interface Comment {
   content: string;
   created_at: string;
   parent_id: string | null;
+  likes_count: number;
+  dislikes_count: number;
 }
 
 interface CommentWithReplies extends Comment {
@@ -23,10 +25,38 @@ export default function CommentsSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
+  const [userReactions, setUserReactions] = useState<Record<string, 'like' | 'dislike' | null>>({});
+  const [copiedCommentId, setCopiedCommentId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchComments();
+    loadUserReactions();
   }, []);
+
+  const getUserFingerprint = (): string => {
+    let fingerprint = localStorage.getItem('user_fingerprint');
+    if (!fingerprint) {
+      fingerprint = `fp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem('user_fingerprint', fingerprint);
+    }
+    return fingerprint;
+  };
+
+  const loadUserReactions = async () => {
+    const fingerprint = getUserFingerprint();
+    const { data, error } = await supabase
+      .from('comment_reactions')
+      .select('comment_id, reaction_type')
+      .eq('user_fingerprint', fingerprint);
+
+    if (!error && data) {
+      const reactionsMap: Record<string, 'like' | 'dislike' | null> = {};
+      data.forEach((reaction) => {
+        reactionsMap[reaction.comment_id] = reaction.reaction_type as 'like' | 'dislike';
+      });
+      setUserReactions(reactionsMap);
+    }
+  };
 
   const fetchComments = async () => {
     const { data, error } = await supabase
@@ -103,6 +133,44 @@ export default function CommentsSection() {
 
     setIsSubmitting(false);
     setTimeout(() => setSubmitMessage(''), 5000);
+  };
+
+  const handleReaction = async (commentId: string, reactionType: 'like' | 'dislike') => {
+    const fingerprint = getUserFingerprint();
+    const currentReaction = userReactions[commentId];
+
+    if (currentReaction === reactionType) {
+      return;
+    }
+
+    const { error } = await supabase.from('comment_reactions').insert({
+      comment_id: commentId,
+      reaction_type: reactionType,
+      user_fingerprint: fingerprint,
+    });
+
+    if (!error) {
+      setUserReactions((prev) => ({
+        ...prev,
+        [commentId]: reactionType,
+      }));
+      fetchComments();
+    }
+  };
+
+  const handleLike = (commentId: string) => {
+    handleReaction(commentId, 'like');
+  };
+
+  const handleDislike = (commentId: string) => {
+    handleReaction(commentId, 'dislike');
+  };
+
+  const handleShare = (commentId: string) => {
+    const commentUrl = `${window.location.origin}${window.location.pathname}#comment-${commentId}`;
+    navigator.clipboard.writeText(commentUrl);
+    setCopiedCommentId(commentId);
+    setTimeout(() => setCopiedCommentId(null), 2000);
   };
 
   const formatDate = (dateString: string) => {
@@ -192,13 +260,49 @@ export default function CommentsSection() {
           <div className="text-slate-700 dark:text-slate-300 whitespace-pre-wrap mb-2">
             {renderMathContent(comment.content)}
           </div>
-          <button
-            onClick={() => setReplyingTo(isReplying ? null : comment.id)}
-            className="flex items-center gap-1 text-xs text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-400 font-medium"
-          >
-            <Reply className="w-3 h-3" />
-            {isReplying ? 'Cancel' : 'Reply'}
-          </button>
+          <div id={`comment-${comment.id}`} className="flex items-center gap-4 flex-wrap">
+            <button
+              onClick={() => setReplyingTo(isReplying ? null : comment.id)}
+              className="flex items-center gap-1 text-xs text-orange-400 hover:text-orange-500 dark:text-orange-300 dark:hover:text-orange-400 font-medium transition-colors"
+            >
+              <Reply className="w-3 h-3" />
+              {isReplying ? 'Cancel' : 'Reply'}
+            </button>
+
+            <button
+              onClick={() => handleLike(comment.id)}
+              disabled={userReactions[comment.id] === 'like'}
+              className={`flex items-center gap-1 text-xs font-medium transition-colors ${
+                userReactions[comment.id] === 'like'
+                  ? 'text-orange-600 dark:text-orange-400'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-400'
+              } disabled:cursor-not-allowed`}
+            >
+              <ThumbsUp className="w-3 h-3" />
+              <span>{comment.likes_count}</span>
+            </button>
+
+            <button
+              onClick={() => handleDislike(comment.id)}
+              disabled={userReactions[comment.id] === 'dislike'}
+              className={`flex items-center gap-1 text-xs font-medium transition-colors ${
+                userReactions[comment.id] === 'dislike'
+                  ? 'text-slate-700 dark:text-slate-300'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
+              } disabled:cursor-not-allowed`}
+            >
+              <ThumbsDown className="w-3 h-3" />
+              <span>{comment.dislikes_count}</span>
+            </button>
+
+            <button
+              onClick={() => handleShare(comment.id)}
+              className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-400 font-medium transition-colors"
+            >
+              <Link className="w-3 h-3" />
+              {copiedCommentId === comment.id ? 'Copied!' : 'Share'}
+            </button>
+          </div>
 
           {isReplying && (
             <form
