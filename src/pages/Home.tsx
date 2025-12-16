@@ -117,7 +117,7 @@ export default function Home() {
           </p>
           <div className="flex items-center justify-center gap-2 text-slate-500 text-sm">
             <Users className="w-4 h-4" />
-            <span>{visitorCount.toLocaleString()} unique visitors</span>
+            <span>{visitorCount.toLocaleString()} visitors</span>
           </div>
         </header>
 
