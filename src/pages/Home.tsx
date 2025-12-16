@@ -1,0 +1,249 @@
+import { useState, useEffect } from 'react';
+import { ExternalLink, BookOpen, FileText, GraduationCap, Copy, Check, Users, Mail } from 'lucide-react';
+import { getVisitorCount } from '../lib/visitorTracking';
+
+export default function Home() {
+  const [copied, setCopied] = useState(false);
+  const [visitorCount, setVisitorCount] = useState<number>(0);
+
+  useEffect(() => {
+    getVisitorCount().then(setVisitorCount);
+  }, []);
+
+  const bibtex = `@article{lai2025principles,
+  title={The principles of diffusion models},
+  author={Lai, Chieh-Hsin and Song, Yang and Kim, Dongjun and Mitsufuji, Yuki and Ermon, Stefano},
+  journal={arXiv preprint arXiv:2510.21890},
+  year={2025}
+}`;
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(bibtex);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  type Tab = {
+    id: string;
+    label: string;
+    icon: typeof FileText;
+    type: 'external' | 'internal';
+    url?: string;
+    path?: string;
+  };
+
+  const authors = [
+    {
+      name: 'Chieh-Hsin Lai',
+      emails: ['chieh-hsin.lai@sony.com', 'chiehhsinlai@gmail.com'],
+      twitter: 'https://x.com/JCJesseLai',
+    },
+    {
+      name: 'Yang Song',
+      emails: ['thusongyang@gmail.com'],
+    },
+    {
+      name: 'Dongjun Kim',
+      emails: ['dongjun@stanford.edu'],
+    },
+    {
+      name: 'Yuki Mitsufuji',
+      emails: ['yuhki.mitsufuji@sony.com'],
+    },
+    {
+      name: 'Stefano Ermon',
+      emails: ['ermon@cs.stanford.edu'],
+    },
+  ];
+
+  const tabsRow1: Tab[] = [
+    {
+      id: 'arxiv',
+      label: 'arXiv',
+      icon: FileText,
+      type: 'external',
+      url: 'https://arxiv.org/abs/2510.21890',
+    },
+    {
+      id: 'blog',
+      label: 'Blog Post (Compact)',
+      icon: FileText,
+      type: 'internal',
+      path: '/blog',
+    },
+    {
+      id: 'teaching',
+      label: 'Teaching Guide',
+      icon: GraduationCap,
+      type: 'internal',
+      path: '/teaching',
+    },
+  ];
+
+  const tabsRow2: Tab[] = [
+    {
+      id: 'read-online',
+      label: 'Read Online',
+      icon: BookOpen,
+      type: 'internal',
+      path: '/read-online',
+    },
+    {
+      id: 'publisher',
+      label: 'Publisher Version',
+      icon: ExternalLink,
+      type: 'internal',
+      path: '/publisher',
+    },
+  ];
+
+  const handleTabClick = (tab: Tab) => {
+    if (tab.type === 'external' && tab.url) {
+      window.open(tab.url, '_blank', 'noopener,noreferrer');
+    } else if (tab.type === 'internal' && tab.path) {
+      window.location.href = tab.path;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+      <div className="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <header className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-slate-900 mb-3 leading-tight">
+            The Principles of Diffusion Models
+          </h1>
+          <p className="text-2xl text-slate-700 font-medium mb-6">
+            From Origins to Advances
+          </p>
+          <div className="flex items-center justify-center gap-2 text-slate-500 text-sm">
+            <Users className="w-4 h-4" />
+            <span>{visitorCount.toLocaleString()} unique visitors</span>
+          </div>
+        </header>
+
+        <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-6 mb-8">
+          <h2 className="text-xl font-semibold text-slate-800 mb-4">Authors</h2>
+          <div className="space-y-2">
+            {authors.map((author, index) => (
+              <div key={index} className="border-b border-slate-100 last:border-0 pb-2 last:pb-0">
+                <p className="font-semibold text-slate-900 text-sm mb-1">{author.name}</p>
+                <div className="flex flex-wrap items-center gap-2 text-xs">
+                  {author.emails.map((email, emailIndex) => (
+                    <a
+                      key={emailIndex}
+                      href={`mailto:${email}`}
+                      className="flex items-center gap-1 text-slate-600 hover:text-orange-600 transition-colors"
+                    >
+                      <Mail className="w-3 h-3" />
+                      {email}
+                    </a>
+                  ))}
+                  {author.twitter && (
+                    <a
+                      href={author.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-slate-600 hover:text-orange-600 transition-colors"
+                    >
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                      </svg>
+                      @JCJesseLai
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 mb-8">
+          <h2 className="text-2xl font-semibold text-slate-800 mb-4">Abstract</h2>
+          <div className="text-slate-700 leading-relaxed space-y-4">
+            <p>
+              This book focuses on the principles that have shaped the development of diffusion models, tracing their origins and showing how different formulations arise from common mathematical ideas. Diffusion modeling begins by specifying a forward corruption process that gradually turns data into noise. This forward process links the data distribution to a simple noise distribution by defining a continuous family of intermediate distributions. The core objective of a diffusion model is to construct another process that runs in the opposite direction, transforming noise into data while recovering the same intermediate distributions defined by the forward corruption process.
+            </p>
+            <p>
+              We describe three complementary ways to formalize this idea. The variational view, inspired by variational autoencoders, sees diffusion as learning to remove noise step by step, solving small denoising objectives that together teach the model to turn noise back into data. The score-based view, rooted in energy-based modeling, learns the gradient of the evolving data distribution, which indicates how to nudge samples toward more likely regions. The flow-based view, related to normalizing flows, treats generation as following a smooth path that moves samples from noise to data under a learned velocity field.
+            </p>
+            <p>
+              These perspectives share a common backbone: a learned time-dependent velocity field whose flow transports a simple prior to the data. With this in hand, sampling amounts to solving a differential equation that evolves noise into data along a continuous generative trajectory. On this foundation, the monograph discusses guidance for controllable generation, advanced numerical solvers for efficient sampling, and diffusion-motivated flow-map models that learn direct mappings between arbitrary times along this trajectory.
+            </p>
+            <p>
+              This monograph is written for readers with a basic deep learning background who seek a clear, conceptual, and mathematically grounded understanding of diffusion models. It clarifies the theoretical foundations, explains the reasoning behind their diverse formulations, and provides a stable footing for further study and research in this rapidly evolving field. It serves both as a principled reference for researchers and as an accessible entry point for learners.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden mb-8">
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold text-slate-800 mb-6 text-center">Access the Book</h2>
+            <div className="space-y-4">
+              <div className="flex flex-wrap justify-center gap-3">
+                {tabsRow1.map((tab) => {
+                  const Icon = tab.icon;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleTabClick(tab)}
+                      className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 bg-orange-500 hover:bg-orange-600 text-white shadow-md"
+                    >
+                      <Icon className="w-5 h-5" />
+                      {tab.label}
+                      {tab.type === 'external' && <ExternalLink className="w-4 h-4" />}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="flex flex-wrap justify-center gap-3">
+                {tabsRow2.map((tab) => {
+                  const Icon = tab.icon;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleTabClick(tab)}
+                      className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 bg-orange-500 hover:bg-orange-600 text-white shadow-md"
+                    >
+                      <Icon className="w-5 h-5" />
+                      {tab.label}
+                      {tab.type === 'external' && <ExternalLink className="w-4 h-4" />}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-lg border-2 border-orange-200 p-8 mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-3xl font-bold text-slate-900">How to Cite</h2>
+            <button
+              onClick={handleCopy}
+              className="flex items-center gap-2 px-5 py-2.5 bg-orange-500 hover:bg-orange-600 rounded-lg transition-colors text-white font-semibold shadow-md hover:shadow-lg"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-5 h-5" />
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <Copy className="w-5 h-5" />
+                  Copy BibTeX
+                </>
+              )}
+            </button>
+          </div>
+          <pre className="bg-white border-2 border-orange-200 rounded-lg p-6 overflow-x-auto text-sm font-mono text-slate-800 leading-relaxed shadow-inner">
+            {bibtex}
+          </pre>
+        </div>
+
+        <footer className="mt-12 text-center text-slate-500 text-sm">
+          <p>© 2025 The Principles of Diffusion Models. All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+  );
+}
