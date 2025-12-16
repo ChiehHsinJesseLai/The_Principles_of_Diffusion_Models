@@ -1,5 +1,6 @@
 import { ArrowLeft, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
 
 export default function ReadOnline() {
   return (
@@ -30,6 +31,8 @@ export default function ReadOnline() {
           </p>
         </div>
       </div>
+
+      <ScrollToTop />
     </div>
   );
 }

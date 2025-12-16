@@ -1,5 +1,6 @@
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
 
 export default function Publisher() {
   return (
@@ -30,6 +31,8 @@ export default function Publisher() {
           </p>
         </div>
       </div>
+
+      <ScrollToTop />
     </div>
   );
 }

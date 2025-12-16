@@ -2,6 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
+import ScrollToTop from '../components/ScrollToTop';
 
 export default function BlogPost() {
   return (
@@ -38,7 +39,7 @@ export default function BlogPost() {
                 In what follows, we slow the story down and keep a single guiding thread:
               </p>
 
-              <blockquote className="border-l-4 border-blue-500 pl-6 italic text-xl text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-xl text-slate-700 my-6">
                 All these models describe different ways to <em>move probability mass</em> from "simple noise" to "complicated data". Under the surface, they are all based on the same principle from calculus: the <em>change-of-variable rule</em>.
               </blockquote>
 
@@ -519,7 +520,7 @@ export default function BlogPost() {
                 This immediately raises a recurring question:
               </p>
 
-              <blockquote className="border-l-4 border-blue-500 pl-6 italic text-lg text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-lg text-slate-700 my-6">
                 In diffusion models, what happens to the underlying <em>probability density</em> when we move (and sometimes randomly perturb) all points, from the data distribution toward the prior, or back again?
               </blockquote>
 
@@ -583,7 +584,7 @@ export default function BlogPost() {
                 The takeaway we will keep using is:
               </p>
 
-              <blockquote className="border-l-4 border-blue-500 pl-6 italic text-lg text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-lg text-slate-700 my-6">
                 If we move points by an invertible map, density changes according to how much the map locally stretches or compresses space.
               </blockquote>
 
@@ -683,7 +684,7 @@ export default function BlogPost() {
                 is called the <em>advective flux</em>. Intuitively, it is "<em>density × speed</em>": how much probability is being carried past <InlineMath math="\mathbf{x}" /> per unit time. With this notation, the continuity equation is just a local balance law:
               </p>
 
-              <blockquote className="border-l-4 border-blue-500 pl-6 italic text-lg text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-lg text-slate-700 my-6">
                 Density at <InlineMath math="\mathbf{x}" /> goes <em>up</em> when more probability flows <em>in</em> than flows <em>out</em>, and goes <em>down</em> when more flows <em>out</em> than flows <em>in</em>.
               </blockquote>
 
@@ -753,7 +754,7 @@ export default function BlogPost() {
                 This raises a natural question:
               </p>
 
-              <blockquote className="border-l-4 border-blue-500 pl-6 italic text-lg text-slate-700 my-6">
+              <blockquote className="border-l-4 border-orange-500 pl-6 italic text-lg text-slate-700 my-6">
                 Can we design a standalone generative principle that trains in a stable way, and samples quickly?
               </blockquote>
 
@@ -1084,6 +1085,8 @@ export default function BlogPost() {
           </Link>
         </div>
       </div>
+
+      <ScrollToTop />
     </div>
   );
 }

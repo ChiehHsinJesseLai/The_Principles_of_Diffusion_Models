@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { ExternalLink, BookOpen, FileText, GraduationCap, Copy, Check, Users, Mail } from 'lucide-react';
+import { ExternalLink, BookOpen, FileText, GraduationCap, Copy, Check, Users, Mail, Newspaper } from 'lucide-react';
 import { getVisitorCount } from '../lib/visitorTracking';
+import ScrollToTop from '../components/ScrollToTop';
+import CommentsSection from '../components/CommentsSection';
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -175,6 +177,31 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="bg-gradient-to-br from-blue-50 to-slate-50 rounded-xl shadow-lg border-2 border-blue-200 p-8 mb-8">
+          <div className="flex items-center gap-3 mb-6">
+            <Newspaper className="w-6 h-6 text-blue-600" />
+            <h2 className="text-2xl font-semibold text-slate-800">News & Updates</h2>
+          </div>
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg p-4 border-l-4 border-blue-500 shadow-sm">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-sm font-semibold text-blue-600">2025/12/16</span>
+              </div>
+              <p className="text-slate-700">
+                Added <strong>Teaching Guide</strong> and <strong>Blog Post (Compact)</strong> sections for enhanced learning resources and accessible content overview.
+              </p>
+            </div>
+            <div className="bg-white rounded-lg p-4 border-l-4 border-amber-500 shadow-sm">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-sm font-semibold text-amber-600">Coming Soon</span>
+              </div>
+              <p className="text-slate-700">
+                Publisher for physical print version is currently being sorted out. Stay tuned for updates on availability.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden mb-8">
           <div className="p-6">
             <h2 className="text-2xl font-semibold text-slate-800 mb-6 text-center">Access the Book</h2>
@@ -240,10 +267,14 @@ export default function Home() {
           </pre>
         </div>
 
+        <CommentsSection />
+
         <footer className="mt-12 text-center text-slate-500 text-sm">
           <p>© 2025 The Principles of Diffusion Models. All rights reserved.</p>
         </footer>
       </div>
+
+      <ScrollToTop />
     </div>
   );
 }

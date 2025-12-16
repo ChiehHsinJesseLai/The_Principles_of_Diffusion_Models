@@ -1,5 +1,6 @@
 import { ArrowLeft, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '../components/ScrollToTop';
 
 export default function TeachingGuide() {
   return (
@@ -47,6 +48,8 @@ export default function TeachingGuide() {
           </div>
         </div>
       </div>
+
+      <ScrollToTop />
     </div>
   );
 }
