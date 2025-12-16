@@ -129,10 +129,6 @@ export default function Home() {
           <p className="text-2xl text-slate-700 dark:text-slate-300 dark:text-slate-300 font-medium mb-6">
             From Origins to Advances
           </p>
-          <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
-            <Users className="w-4 h-4" />
-            <span>{visitorCount.toLocaleString()} visitors</span>
-          </div>
         </header>
 
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6 mb-8">
@@ -277,7 +273,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-50/40 to-amber-50/40 rounded-xl shadow-lg p-8 mb-8">
+        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-lg p-8 mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <Quote className="w-6 h-6 text-orange-400" />
@@ -307,8 +303,12 @@ export default function Home() {
 
         <CommentsSection />
 
-        <footer className="mt-12 text-center text-slate-500 text-sm">
-          <p>© 2025 The Principles of Diffusion Models. All rights reserved.</p>
+        <footer className="mt-12 text-slate-500 text-sm">
+          <div className="flex items-center justify-end gap-2 mb-1 text-slate-400 dark:text-slate-500">
+            <Users className="w-4 h-4" />
+            <span>{visitorCount.toLocaleString()} visitors</span>
+          </div>
+          <p className="text-center">© 2025 The Principles of Diffusion Models. All rights reserved.</p>
         </footer>
       </div>
 
