@@ -124,7 +124,10 @@ export default function Home() {
         </header>
 
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-6 mb-8">
-          <h2 className="text-xl font-semibold text-slate-800 mb-4">Authors</h2>
+          <div className="flex items-center gap-3 mb-4">
+            <Users className="w-6 h-6 text-orange-600" />
+            <h2 className="text-2xl font-semibold text-slate-800">Authors</h2>
+          </div>
           <div className="space-y-2">
             {authors.map((author, index) => (
               <div key={index} className="border-b border-slate-100 last:border-0 pb-2 last:pb-0">
@@ -160,7 +163,10 @@ export default function Home() {
         </div>
 
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 p-8 mb-8">
-          <h2 className="text-2xl font-semibold text-slate-800 mb-4">Abstract</h2>
+          <div className="flex items-center gap-3 mb-4">
+            <BookOpen className="w-6 h-6 text-orange-600" />
+            <h2 className="text-2xl font-semibold text-slate-800">Abstract</h2>
+          </div>
           <div className="text-slate-700 leading-relaxed space-y-4">
             <p>
               This book focuses on the principles that have shaped the development of diffusion models, tracing their origins and showing how different formulations arise from common mathematical ideas. Diffusion modeling begins by specifying a forward corruption process that gradually turns data into noise. This forward process links the data distribution to a simple noise distribution by defining a continuous family of intermediate distributions. The core objective of a diffusion model is to construct another process that runs in the opposite direction, transforming noise into data while recovering the same intermediate distributions defined by the forward corruption process.
@@ -191,9 +197,9 @@ export default function Home() {
                 Publisher for physical print version is currently being sorted out. Stay tuned for updates on availability.
               </p>
             </div>
-            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-orange-500">
+            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
               <div className="flex items-start justify-between mb-2">
-                <span className="text-sm font-semibold text-orange-600">2025/12/16</span>
+                <span className="text-sm font-semibold text-slate-600">2025/12/16</span>
               </div>
               <p className="text-slate-700">
                 Added <strong>Teaching Guide</strong> and <strong>Blog Post (Compact)</strong> sections for enhanced learning resources and accessible content overview.
@@ -212,7 +218,10 @@ export default function Home() {
 
         <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden mb-8">
           <div className="p-6">
-            <h2 className="text-2xl font-semibold text-slate-800 mb-6 text-center">Access the Book</h2>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <BookOpen className="w-6 h-6 text-orange-600" />
+              <h2 className="text-2xl font-semibold text-slate-800">Access the Book</h2>
+            </div>
             <div className="space-y-4">
               <div className="flex flex-wrap justify-center gap-3">
                 {tabsRow1.map((tab) => {
@@ -250,9 +259,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-lg border-2 border-orange-200 p-8 mb-8">
+        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl shadow-lg p-8 mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold text-slate-900">How to Cite</h2>
+            <div className="flex items-center gap-3">
+              <FileText className="w-6 h-6 text-orange-600" />
+              <h2 className="text-2xl font-semibold text-slate-800">How to Cite</h2>
+            </div>
             <button
               onClick={handleCopy}
               className="flex items-center gap-2 px-5 py-2.5 bg-orange-500 hover:bg-orange-600 rounded-lg transition-colors text-white font-semibold shadow-md hover:shadow-lg"
