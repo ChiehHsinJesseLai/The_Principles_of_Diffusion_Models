@@ -62,14 +62,14 @@ export default function Home() {
     {
       id: 'arxiv',
       label: 'arXiv',
-      icon: FileText,
+      icon: BookOpen,
       type: 'external',
       url: 'https://arxiv.org/abs/2510.21890',
     },
     {
       id: 'blog',
       label: 'Blog Post (Compact)',
-      icon: FileText,
+      icon: Feather,
       type: 'internal',
       path: '/blog',
     },
@@ -108,7 +108,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#EDDFFF' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F4ECFF' }}>
       <div className="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <header className="text-center mb-12">
           <h1 className="text-5xl font-bold text-slate-900 mb-3 leading-tight">
@@ -189,22 +189,6 @@ export default function Home() {
             <h2 className="text-2xl font-semibold text-slate-800">News & Updates</h2>
           </div>
           <div className="space-y-4">
-            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-amber-500">
-              <div className="flex items-start justify-between mb-2">
-                <span className="text-sm font-semibold text-amber-600">Coming Soon</span>
-              </div>
-              <p className="text-slate-700">
-                Publisher for physical print version is currently being sorted out. Stay tuned for updates on availability.
-              </p>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
-              <div className="flex items-start justify-between mb-2">
-                <span className="text-sm font-semibold text-slate-600">2025/10/24</span>
-              </div>
-              <p className="text-slate-700">
-                Our book <strong>The Principles of Diffusion Models</strong> first publicly released on arXiv.
-              </p>
-            </div>
             <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
               <div className="flex items-start justify-between mb-2">
                 <span className="text-sm font-semibold text-slate-600">2025/12/16</span>
@@ -219,6 +203,22 @@ export default function Home() {
               </div>
               <p className="text-slate-700">
                 Official webpage established to provide comprehensive access to <em>The Principles of Diffusion Models</em> monograph and related resources.
+              </p>
+            </div>
+            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-slate-500">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-sm font-semibold text-slate-600">2025/10/24</span>
+              </div>
+              <p className="text-slate-700">
+                Our book <strong>The Principles of Diffusion Models</strong> was made publicly available on arXiv.
+              </p>
+            </div>
+            <div className="bg-slate-50 rounded-lg p-4 border-l-4 border-amber-500">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-sm font-semibold text-amber-600">Coming Soon</span>
+              </div>
+              <p className="text-slate-700">
+                Publisher for physical print version is currently being sorted out. Stay tuned for updates on availability.
               </p>
             </div>
           </div>
@@ -242,7 +242,6 @@ export default function Home() {
                     >
                       <Icon className="w-5 h-5" />
                       {tab.label}
-                      {tab.type === 'external' && <ExternalLink className="w-4 h-4" />}
                     </button>
                   );
                 })}
@@ -258,7 +257,6 @@ export default function Home() {
                     >
                       <Icon className="w-5 h-5" />
                       {tab.label}
-                      {tab.type === 'external' && <ExternalLink className="w-4 h-4" />}
                     </button>
                   );
                 })}

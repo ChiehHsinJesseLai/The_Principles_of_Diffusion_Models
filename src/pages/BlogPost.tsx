@@ -6,7 +6,7 @@ import ScrollToTop from '../components/ScrollToTop';
 
 export default function BlogPost() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#EDDFFF' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F4ECFF' }}>
       <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <Link
           to="/"
