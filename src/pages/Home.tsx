@@ -56,7 +56,7 @@ export default function Home() {
     },
     {
       name: 'Dongjun Kim',
-      emails: ['dongjun@stanford.edu'],
+      emails: ['partitionsofunity@gmail.com'],
     },
     {
       name: 'Yuki Mitsufuji',
